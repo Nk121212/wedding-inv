@@ -48,8 +48,123 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     />
+
+    <style>
+      #cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, #333 0%, #222 100%);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+        padding: 20px;
+        font-family: "Work Sans", Arial, sans-serif; /* Font untuk teks biasa */
+      }
+      #cover .cover-photo-container {
+        position: relative;
+        margin-bottom: 30px;
+      }
+      #cover .cover-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 2;
+        position: relative;
+      }
+      #cover .wreath {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        z-index: 1;
+      }
+      #cover .guest-name {
+        font-size: 1.5rem;
+        margin-top: 20px;
+      }
+      #cover .wedding-of {
+        margin-top: 10px;
+        font-size: 5rem;
+        margin-bottom: -10px;
+        font-family: "Sacramento", Arial, sans-serif; /* Font untuk 'The Wedding of' */
+      }
+      #cover h1.main-name {
+        font-family: "Sacramento", Arial, sans-serif;
+        font-size: 4rem;
+        margin-bottom: 10px;
+        color: #e6e6e6;
+      }
+      #cover p.intro-text {
+        font-size: 1rem;
+        width: 80%;
+        margin: 0 auto;
+        line-height: 1.5;
+      }
+      .gift-box {
+        border: 1px solid #e6e6e6;
+        padding: 30px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
+      .gift-box h3 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #555;
+      }
+    </style>
   </head>
   <body>
+    <div id="cover">
+      <div class="cover-photo-container">
+        <img
+          src="images/ogi/yogimardini2.jpg"
+          alt="Pasangan Pengantin"
+          class="cover-photo"
+        />
+        <img
+          src="images/ogi/1e23b84a-5a36-4cae-ae80-1a91ba96418b-removebg-preview.png"
+          alt="Wreath"
+          class="wreath"
+        />
+      </div>
+
+      <p class="wedding-of">The Wedding of</p>
+      <h1 class="main-name">Yogi &amp; Mardini</h1>
+
+      <!-- <h3 class="guest-name">
+        Yth. <span id="guest-name">Bpk/Ibu/Saudara/i</span>
+      </h3>
+      <p class="intro-text">
+        Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Menghadiri
+        Acara Pernikahan Kami.
+      </p> -->
+
+      <a
+        style="margin-top: 2rem"
+        class="btn btn-primary"
+        href="#"
+        id="openBtn"
+        class="btn-custom"
+        >Buka Undangan</a
+      >
+    </div>
+
+    <audio id="myAudio" loop>
+      <source src="wedding-song.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
     <div class="fh5co-loader"></div>
 
     <div id="page">
@@ -86,7 +201,9 @@
                   <h2>Kami Akan Menikah</h2>
                   <div class="simply-countdown simply-countdown-one"></div>
                   <p>
-                    <a href="#" class="btn btn-default btn-sm">Save the date</a>
+                    <a href="#" id="saveDateBtn" class="btn btn-default btn-sm"
+                      >Save the date</a
+                    >
                   </p>
                 </div>
               </div>
@@ -192,89 +309,6 @@
         </div>
       </div>
 
-      <!-- <div id="fh5co-couple-story">
-        <div class="container">
-          <div class="row">
-            <div
-              class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box"
-            >
-              <span>We Love Each Other</span>
-              <h2>Our Story</h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
-              </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 col-md-offset-0">
-              <ul class="timeline animate-box">
-                <li class="animate-box">
-                  <div
-                    class="timeline-badge"
-                    style="background-image: url(images/couple-1.jpg)"
-                  ></div>
-                  <div class="timeline-panel">
-                    <div class="timeline-heading">
-                      <h3 class="timeline-title">First We Meet</h3>
-                      <span class="date">December 25, 2015</span>
-                    </div>
-                    <div class="timeline-body">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the Semantics, a large language ocean.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li class="timeline-inverted animate-box">
-                  <div
-                    class="timeline-badge"
-                    style="background-image: url(images/couple-2.jpg)"
-                  ></div>
-                  <div class="timeline-panel">
-                    <div class="timeline-heading">
-                      <h3 class="timeline-title">First Date</h3>
-                      <span class="date">December 28, 2015</span>
-                    </div>
-                    <div class="timeline-body">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the Semantics, a large language ocean.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li class="animate-box">
-                  <div
-                    class="timeline-badge"
-                    style="background-image: url(images/couple-3.jpg)"
-                  ></div>
-                  <div class="timeline-panel">
-                    <div class="timeline-heading">
-                      <h3 class="timeline-title">In A Relationship</h3>
-                      <span class="date">January 1, 2016</span>
-                    </div>
-                    <div class="timeline-body">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the Semantics, a large language ocean.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
       <div id="fh5co-maps" class="fh5co-section animate-box">
         <div class="container">
           <div class="row">
@@ -287,6 +321,39 @@
           <div class="row">
             <div class="col-md-12">
               <div id="mapid" style="height: 500px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="fh5co-gift" class="fh5co-section animate-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+              <span>Wedding Gift</span>
+              <h2>Amplop Digital</h2>
+              <p>
+                Doa restu dari Anda adalah hadiah terindah. Namun, jika ingin
+                memberikan tanda kasih, dapat melalui rekening bank atau
+                e-wallet berikut:
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <div class="gift-box">
+                <h3>Transfer Bank</h3>
+                <p><strong>BCA:</strong> 1234567890<br />a.n. Yogi Hambali</p>
+              </div>
+            </div>
+            <div class="col-md-6 text-center">
+              <div class="gift-box">
+                <h3>E-Wallet</h3>
+                <p>
+                  <strong>GoPay / Dana:</strong> 081234567890<br />a.n. Mardini
+                  nurhasanah
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -370,30 +437,12 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script>
-      // var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
-
-      // default example
-      // simplyCountdown(".simply-countdown-one", {
-      //   year: d.getFullYear(),
-      //   month: d.getMonth() + 1,
-      //   day: d.getDate(),
-      // });
-
       simplyCountdown(".simply-countdown-one", {
         year: "2025",
         month: "11",
         day: "06",
       });
 
-      //jQuery example
-      // $("#simply-countdown-losange").simplyCountdown({
-      //   year: d.getFullYear(),
-      //   month: d.getMonth() + 1,
-      //   day: d.getDate(),
-      //   enableUtc: false,
-      // });
-
-      // Inisialisasi Peta Menggunakan Leaflet
       var mymap = L.map("mapid").setView([-6.853743, 107.978931], 15);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -405,6 +454,33 @@
       marker
         .bindPopup("<b>Lokasi Resepsi</b><br>Dusun Cibogo RT 03/RW 04")
         .openPopup();
+
+      document
+        .getElementById("openBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          var cover = document.getElementById("cover");
+          var audio = document.getElementById("myAudio");
+
+          cover.style.opacity = "0";
+          setTimeout(function () {
+            cover.style.display = "none";
+          }, 1000);
+
+          audio.play();
+        });
+
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      window.addEventListener("DOMContentLoaded", (event) => {
+        const guestName = getQueryParam("to");
+        if (guestName) {
+          document.getElementById("guest-name").textContent = guestName;
+        }
+      });
     </script>
   </body>
 </html>
